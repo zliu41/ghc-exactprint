@@ -362,6 +362,8 @@ transformHighLevelTests =
   , mkTestModChange addHiding2 "AddHiding2.hs"
 
   , mkTestModChange cloneDecl1 "CloneDecl1.hs"
+
+  , mkTestModChange changeBrittany1  "Brittany1.hs"
   ]
 
 -- ---------------------------------------------------------------------
@@ -758,4 +760,17 @@ cloneDecl1 ans lp = do
   let (lp',(ans',_),_w) = runTransform ans doChange
   return (ans',lp')
 
+-- ---------------------------------------------------------------------
+
+changeBrittany1 :: Changer
+changeBrittany1 ans lp = do
+  let doChange = do
+         -- tlDecs <- hsDecls lp
+         -- let (d1:d2:ds) = tlDecs
+         -- d2' <- fst <$> cloneT d2
+         -- replaceDecls lp (d1:d2:d2':ds)
+        return lp
+
+  let (lp',(ans',_),_w) = runTransform ans doChange
+  return (ans',lp')
 -- ---------------------------------------------------------------------
