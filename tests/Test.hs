@@ -141,15 +141,7 @@ mkTests = do
   -- listTests
   roundTripTests <- findTests
   prettyRoundTripTests <- findPrettyTests
-  return $ TestList [
-                      internalTests,
-                      roundTripTests
-                    ,
-                      transformTests
-                    , failingTests
-                    , noAnnotationTests
-                    ,
-                      prettyRoundTripTests
+  return $ TestList [ failingTests
                     ]
 
 -- Tests that will fail until https://phabricator.haskell.org/D907 lands in a
@@ -161,6 +153,7 @@ failingTests = testList "Failing tests"
     mkTestModBad "InfixOperator.hs"
 
 #if __GLASGOW_HASKELL__ > 802
+  , mkTestModBad "overloadedlabelsrun04.hs"
 #elif __GLASGOW_HASKELL__ > 800
   , mkTestModBad "overloadedlabelsrun04.hs"
 #elif __GLASGOW_HASKELL__ > 710

@@ -63,7 +63,7 @@ import System.FilePath
 
 -- import Debug.Trace
 testPrefix :: FilePath
-testPrefix = "tests" </> "examples"
+testPrefix = "." </> "tests" </> "examples"
 
 testList :: String -> [Test] -> Test
 testList s ts = TestLabel s (TestList ts)
@@ -162,7 +162,12 @@ genTest f origFile expectedFile  = do
               consistency = checkConsistency apianns pmod
               inconsistent = if null consistency then Nothing else Just consistency
               status = if printed == pristine then Success else RoundTripFailure
-              cppStatus = if useCpp then Just orig else Nothing
+          putStrLn $ "PRINTED!!! \n\n"
+          putStrLn printed
+          putStrLn $ "\n\nExpected!!\n\n"
+          putStrLn expected
+          putStrLn ""
+          let cppStatus = if useCpp then Just orig else Nothing
           return $ Right Report {..}
 
 
